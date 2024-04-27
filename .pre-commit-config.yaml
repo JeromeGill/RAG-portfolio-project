@@ -1,0 +1,10 @@
+- repo: local
+  hooks:
+    - id: ruff
+      name: ruff
+      files: \.(py)$
+      args: [ --fix ]
+    - id: ruff-format
+      name: ruff-format
+      files: \.(py)$
+      
