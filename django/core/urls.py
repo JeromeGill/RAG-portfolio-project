@@ -16,8 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from document import views
+
+router = routers.DefaultRouter()
+router.register('documents', views.DocumentView, 'document')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("chat/", include("chat.urls")),
+    path("document/", include("document.urls")),
+    path('api/', include(router.urls)),
 ]

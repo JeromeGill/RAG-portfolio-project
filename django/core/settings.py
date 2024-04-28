@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chat'
+    'corsheaders',
+    'rest_framework',
+    'document'
 ]
 
 MIDDLEWARE = [
@@ -48,9 +50,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]
 
 TEMPLATES = [
     {
