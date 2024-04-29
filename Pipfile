@@ -10,6 +10,12 @@ pre-commit = "*"
 pyright = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+environ = "*"
+haystack-ai = "*"
+pinecone-haystack = "*"
+py-dotenv = "*"
+python-dotenv = "*"
+sentence-transformers = ">=2.2.0"
 
 [dev-packages]
 

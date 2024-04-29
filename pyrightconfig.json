@@ -1,9 +1,10 @@
 {
     "include": [
-      "src"
+      "django"
     ],
   
     "exclude": [
+      "frontend",
       "**/node_modules",
       "**/__pycache__",
       "src/experimental",
@@ -11,7 +12,6 @@
     ],
   
     "ignore": [
-      "src/oldstuff"
     ],
   
     "defineConstant": {
@@ -54,4 +54,3 @@
       }
     ]
   }
-  
