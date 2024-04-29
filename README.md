@@ -22,6 +22,20 @@ pipenv install
 
 Once that has completed, you can experiment with the documentRAG chatbot from the CLI by following the instructions in the [documentRAG readme](documentRAG/README.md)
 
+# Running the Django backend
+
+From the root cd into the django subdirectory `cd django`
+
+Here you can run the tests with `./manage.py test`
+
+Or boot up the server with `./manage.py runserver`
+
+With the server running on port 8000, you'll be able to make a request to the chatbot with curl
+
+`curl -d '{"question":"Your question...."}' -H "Content-Type: application/json" -X POST http://localhost:8000/api`
+
+If this has worked, you should see the response `"Question submitted successfully"`
+
 # Architecture
 
 ## High level
