@@ -1,3 +1,27 @@
+# DocumentRAG
+
+The project exists primarily for the author to get more familiar with the python (specifically django) ecosystem.
+
+It will consist of a standalone python library for RAG operations, a django instance for authentication and REST API and a react frontend.
+
+# Getting Started
+
+This project is being developed using pipenv.
+
+To get started, navigate to the root of the repo and run
+```
+pipenv shell
+```
+
+This opens a venv for the repo using pipenv. You will see the name of the repo in brackets prefixing your CLI if it has worked.
+
+From here install dependencies with
+```
+pipenv install
+```
+
+Once that has completed, you can experiment with the documentRAG chatbot from the CLI by following the instructions in the [documentRAG readme](documentRAG/README.md)
+
 # Architecture
 
 ## High level
@@ -42,6 +66,7 @@ Some guidelines
 https://github.com/HackSoftware/Django-Styleguide
 https://medium.com/@Mr_Pepe/setting-your-python-project-up-for-success-in-2024-365e53f7f31e
 https://docs.djangoproject.com/en/5.0/intro/tutorial01/
+https://medium.com/analytics-vidhya/how-to-create-a-python-library-7d5aea80cc3f
 
 Some toolage
 
