@@ -1,7 +1,5 @@
-from chatbot.Chatbot import Chatbot
-from shared.retriever import retriever
+from .chatbot.Chatbot import factory
 from dotenv import load_dotenv
-import settings
 
 #!python
 """Builds a chat Q/A instance on the CLI using whatever is in the default index
@@ -10,14 +8,7 @@ import settings
 def main():
     load_dotenv()
 
-    chatBot = Chatbot(
-        settings.PROMPT_TEMPLATE,
-        settings.EMBEDDINNG_MODEL,
-        settings.LLM_MODEL,
-        retriever(
-            settings.EMBEDDING_DIMENSIONS
-        )
-    )
+    chatBot = factory()
 
     while True:
         question = input("Ask question: ")

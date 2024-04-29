@@ -2,5 +2,6 @@
 db.sqlite3
 .env
 node_modules
+.egg
 .eggs
-.next
+*.egg-info

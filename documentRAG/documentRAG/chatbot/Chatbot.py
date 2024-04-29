@@ -3,6 +3,10 @@ from haystack.components.embedders import SentenceTransformersTextEmbedder
 from haystack.components.builders import PromptBuilder
 from haystack.components.generators import OpenAIGenerator
 
+from ..shared.retriever import retriever
+from .. import settings
+
+
 class Chatbot():
     def __init__(
             self,
@@ -36,3 +40,14 @@ class Chatbot():
         # This method will need strategy pattern to support other LLMs
         response = self.pipeline.run({"embedder": {"text": question}, "prompt_builder": {"question": question}}, False)
         return response["llm"]["replies"][0]
+
+
+def factory():
+    return Chatbot(
+        settings.PROMPT_TEMPLATE,
+        settings.EMBEDDINNG_MODEL,
+        settings.LLM_MODEL,
+        retriever(
+            settings.EMBEDDING_DIMENSIONS
+        )
+    )

@@ -26,6 +26,8 @@ Once that has completed, you can experiment with the documentRAG chatbot from th
 
 From the root cd into the django subdirectory `cd django`
 
+Link the documentRAG library `pip install -e ../documentRAG`
+
 Here you can run the tests with `./manage.py test`
 
 Or boot up the server with `./manage.py runserver`

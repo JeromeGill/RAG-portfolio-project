@@ -18,7 +18,7 @@ readme = (here / "README.md").read_text()
 
 setup(
     name='documentRAG',
-    packages=find_packages(include=['src']),
+    packages=find_packages(),
     version=version,
     description='',
     author='Jerome Gill',
