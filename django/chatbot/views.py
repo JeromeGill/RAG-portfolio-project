@@ -12,6 +12,7 @@ class QuestionViewSet(APIView):
 
         chatbot = factory()
         print(request)
+        print(request.data)
         serializer = QuestionSerializer(data=request.data)
         if serializer.is_valid():
             answer = chatbot.ask(serializer.data['question'])
