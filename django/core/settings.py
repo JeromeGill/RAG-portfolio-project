@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load the .env file from the parent directory
 dotenv_path = os.path.join(BASE_DIR, '../.env')
-print(dotenv_path)
 load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production

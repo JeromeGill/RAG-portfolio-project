@@ -6,7 +6,7 @@ It will consist of a standalone python library for RAG operations, a django inst
 
 # Getting Started
 
-This project is being developed using pipenv.
+This project is being developed using [pipenv](https://pipenv.pypa.io/en/latest/).
 
 To get started, navigate to the root of the repo and run
 ```
@@ -42,24 +42,25 @@ If this has worked, you should see the response `"Question submitted successfull
 
 ## High level
 
-As a user 
+- As a user
     - I want to be able to know more about a deep topic without having to read and remember the contents of every highly detailed report. 
     - I want to be able to simply ask questions, and get answers.
     - I want to be able to source my facts.
     - I want the facts as they are in the reports, without caveat. I can use my own judgement regarding their quality.
 
-As an admin
+- As an admin
     - I want to be able to upload relevant reports as I find them
     - I want them to be indexed and added to the archive
 
-To achieve this, this project is going to be using the Hackstack framework for LLM projects, with django for admin and entity management.
+To achieve this, this project is going to be using the Hackstack framework for LLM projects, with django for admin, authetication and user management.
 
 ### Frameworks/librarys
 
 - Django
     - Admin panel
     - Admins will be able to upload documents here
-    - Chat session management
+    - REST Api with djangorestframework
+    - Authentication/CORS etc
 - Haystack
     - LLM pipelines
     - Haystack will index uploaded documents into pinecone
@@ -74,18 +75,16 @@ To achieve this, this project is going to be using the Hackstack framework for L
 
 ## MVP/Improvements
 
-
-
 ### useful links for the author
 
 Some guidelines
-https://github.com/HackSoftware/Django-Styleguide
-https://medium.com/@Mr_Pepe/setting-your-python-project-up-for-success-in-2024-365e53f7f31e
-https://docs.djangoproject.com/en/5.0/intro/tutorial01/
-https://medium.com/analytics-vidhya/how-to-create-a-python-library-7d5aea80cc3f
+- https://github.com/HackSoftware/Django-Styleguide
+- https://medium.com/@Mr_Pepe/setting-your-python-project-up-for-success-in-2024-365e53f7f31e
+- https://docs.djangoproject.com/en/5.0/intro/tutorial01/
+- https://medium.com/analytics-vidhya/how-to-create-a-python-library-7d5aea80cc3f
 
 Some toolage
 
-https://github.com/astral-sh/ruff
-https://github.com/microsoft/pyright
-https://django-environ.readthedocs.io/en/latest/quickstart.html
+- https://github.com/astral-sh/ruff
+- https://github.com/microsoft/pyright
+
