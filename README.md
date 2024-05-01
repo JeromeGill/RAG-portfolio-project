@@ -32,9 +32,11 @@ Here you can run the tests with `./manage.py test`
 
 Or boot up the server with `./manage.py runserver`
 
+Create a user in the admin backend
+
 With the server running on port 8000, you'll be able to make a request to the chatbot with curl
 
-`curl -d '{"question":"Your question...."}' -H "Content-Type: application/json" -X POST http://localhost:8000/api`
+`curl -d '{"question":"Your question...."}' -H 'Authorization: Token {{Your token}}' -H "Content-Type: application/json" -X POST http://localhost:8000/api/question`
 
 If this has worked, you should see the response `"Question submitted successfully"`
 
