@@ -13,6 +13,7 @@ export const ChatPanel: React.FC = () => {
         setMessages([
             'Chatbot: Hello! I\'ve been trained on the Undermined report by Global Witness. Ask me anything about it'
         ]);
+
     }
 
     const sendMessage = async (message: string) => {
