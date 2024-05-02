@@ -1,6 +1,11 @@
+"use client"
+
 import { ChatPanel } from "@/components/ChatPanel";
+import { useRequireAuth } from "@/hooks/useRequireAuth";
 
 export default function Home() {
+  useRequireAuth();
+  
   return (
     <main className="">
       <div className="container mx-auto">

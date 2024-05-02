@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .views import is_authed_view
 from chatbot.views import ask_question_view
+from rest_framework.authtoken import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/login', views.obtain_auth_token),
+    path('api/token', is_authed_view, name='is_authed'),
     path("api/question", ask_question_view, name="question")
 ]

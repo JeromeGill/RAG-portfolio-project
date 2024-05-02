@@ -1,7 +1,10 @@
 from django.test import TestCase
 from rest_framework.test import APITestCase
-from .serializers import QuestionSerializer
+from django.contrib.auth.models import User
 from rest_framework.test import APIClient
+from rest_framework.authtoken.models import Token
+from unittest.mock import patch
+from .serializers import QuestionSerializer
 
 class TestQuestionSerializer(APITestCase):
     def test_serializer_with_valid_data(self):
@@ -14,20 +17,31 @@ class TestQuestionSerializer(APITestCase):
         serializer = QuestionSerializer(data={'question': question})
         self.assertFalse(serializer.is_valid())
 
+
 class TestQuestionViewSet(TestCase):
     def setUp(self):
+        self.user = User.objects.create_user(username='test_user', password='test_password')
+        # Create a token for the test user
+        self.token = Token.objects.create(user=self.user)
         self.client = APIClient()
 
-    def test_get_method(self):
-        response = self.client.get('/api')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, "Hello, world. You're at the chatbot index.")
-
     def test_post_method_with_invalid_data(self):
-        response = self.client.post('/api', {'question': 'a' * 1001})
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+        response = self.client.post('/api/question', {'question/': 'a' * 1001})
         self.assertEqual(response.status_code, 400)
 
-    def test_post_method_with_valid_data(self):
-        response = self.client.post('/api', {'question': 'What is the meaning of life?'})
+
+    @patch('chatbot.views.factory')
+    def test_post_method_with_valid_data(self, mock_factory):
+        mock_chatbot = mock_factory.return_value
+        mock_chatbot.ask.return_value = 'Mock answer'
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+        response = self.client.post('/api/question', {'question': 'What is the meaning of life?'})
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, "Question submitted successfully")
+        self.assertEqual(response.data, "Mock answer")
+        mock_chatbot.ask.assert_called_once_with('What is the meaning of life?')
+
+    def test_post_method_without_validtoken(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + 'invalid token')
+        response = self.client.post('/api/question', {'question/': 'a' * 1001})
+        self.assertEqual(response.status_code, 401)
