@@ -1,25 +1,9 @@
-"use client"
+import { LoginForm } from "@/components/login";
 
-import { useLogin } from '@/hooks/useLogin';
-
-const Login: React.FC = () => {
-    const { username, setUsername, password, setPassword, error, handleSubmit } = useLogin();
+export default function Login() {
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        {error && <p>{error}</p>}
-        <button type="submit">Login</button>
-      </form>
+    <div className="w-full max-w-xs">
+      <LoginForm />
     </div>
   );
-};
-
-export default Login;
+}
