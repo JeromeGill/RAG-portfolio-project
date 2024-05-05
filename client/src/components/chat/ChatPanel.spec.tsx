@@ -3,12 +3,12 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChatPanel } from './ChatPanel';
 import { useChatbot } from '@/hooks/useChatbot';
 
-jest.mock('@/hooks/useChatbot');
+vi.mock('@/hooks/useChatbot');
 
 describe('ChatPanel', () => {
   beforeEach(() => {
-    (useChatbot as jest.Mock).mockReturnValue({
-      askChatbot: jest.fn().mockResolvedValue('Chatbot response'),
+    (useChatbot as vi.Mock).mockReturnValue({
+      askChatbot: vi.fn().mockResolvedValue('Chatbot response'),
       isLoading: false,
       error: null,
     });

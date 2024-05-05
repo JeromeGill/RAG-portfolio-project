@@ -17,6 +17,8 @@
       "@/*": ["./src/*"],
     },
 
+    /* Testing */
+    "types": ["vitest/globals"],
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

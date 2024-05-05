@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { ChatInput } from './ChatInput';
 
 describe('ChatInput', () => {
-  const sendMessageMock = jest.fn();
+  const sendMessageMock = vi.fn();
 
   beforeEach(() => {
     render(<ChatInput sendMessage={sendMessageMock} disabled={false} />);
