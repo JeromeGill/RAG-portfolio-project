@@ -15,6 +15,7 @@ pinecone-haystack = "*"
 python-dotenv = "*"
 sentence-transformers = ">=2.2.0"
 pypdf = "*"
+cryptography = "*"
 
 [dev-packages]
 
