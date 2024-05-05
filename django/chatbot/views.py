@@ -11,7 +11,7 @@ from documentRAG.chatbot.Chatbot import factory
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def ask_question_view(request):
-    chatbot = factory()
+    chatbot = factory('anastasia')
     serializer = QuestionSerializer(data=request.data)
     if serializer.is_valid():
         question = serializer.data['question']

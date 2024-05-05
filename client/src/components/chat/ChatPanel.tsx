@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
 import { useChatbot } from '@/hooks/useChatbot';
+import { ScrollArea } from "@/components/ui/scroll-area"
+import LoadingSpinner from '../ui/loading-spinner';
 
 export const ChatPanel: React.FC = () => {
     const [messages, setMessages] = useState<string[]>([]);
@@ -11,8 +13,9 @@ export const ChatPanel: React.FC = () => {
     
     if (messages.length === 0) {
         setMessages([
-            'Chatbot: Hello! I\'ve been trained on the Undermined report by Global Witness. Ask me anything about it'
-        ]);
+            'Chatbot: Hello! I\'ve been trained on Anastasia\'s Ecuador documents. Ask me anything about it. Spanish, english, whatever you like',
+        ],
+    );
 
     }
 
@@ -31,11 +34,14 @@ export const ChatPanel: React.FC = () => {
     // @todo automatically scroll to bottom when new messages are added, or something
     return (
     <> 
-        <div className="chat-messages flex relative overflow-y-scroll flex-col" style={{paddingBottom: 60}}>
+        <ScrollArea style={{paddingBottom: 60}}>
           {messages.map((message, index) => (
             <ChatMessage key={index} message={message} />
           ))}
-        </div>
+          <div className={isLoading ? "" : "hidden"}>
+            <LoadingSpinner/>
+          </div>
+        </ScrollArea>
         <ChatInput sendMessage={sendMessage} disabled={isLoading} />
     </>
     );

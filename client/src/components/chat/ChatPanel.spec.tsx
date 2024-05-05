@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChatPanel } from './ChatPanel';
 import { useChatbot } from '@/hooks/useChatbot';
+import { vi } from 'vitest';
 
 vi.mock('@/hooks/useChatbot');
 

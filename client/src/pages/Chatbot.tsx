@@ -3,10 +3,8 @@ import { ChatPanel } from "@/components/chat";
 export function Chatbot() {
   return (
     <main className="">
-      <div className="container mx-auto">
-        <div className="chat-panel h-screen mx-auto max-w-2xl px-4">
+      <div className="container mx-auto flex items-center">
           <ChatPanel />
-        </div>
       </div>
     </main>
   );
