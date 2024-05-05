@@ -75,18 +75,3 @@ To achieve this, this project is going to be using the Hackstack framework for L
     - React will make an API call to Django to see what documents are available in the index
     - The user will select one, which will open a chat session via the django backend
 
-## MVP/Improvements
-
-### useful links for the author
-
-Some guidelines
-- https://github.com/HackSoftware/Django-Styleguide
-- https://medium.com/@Mr_Pepe/setting-your-python-project-up-for-success-in-2024-365e53f7f31e
-- https://docs.djangoproject.com/en/5.0/intro/tutorial01/
-- https://medium.com/analytics-vidhya/how-to-create-a-python-library-7d5aea80cc3f
-
-Some toolage
-
-- https://github.com/astral-sh/ruff
-- https://github.com/microsoft/pyright
-
