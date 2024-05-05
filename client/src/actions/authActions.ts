@@ -1,6 +1,3 @@
-import Cookies from 'js-cookie';
-import { useLogin } from '@/hooks/useLogin';
-
 export const loginAction = (
     username: string,
     password: string

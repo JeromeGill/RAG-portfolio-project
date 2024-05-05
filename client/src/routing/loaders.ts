@@ -20,7 +20,7 @@ export function protectedLoader({ request }: LoaderFunctionArgs) {
     // to this page upon successful authentication
     if (!AuthProvider.isAuthenticated) {
       alert("You must be logged in to access this page");
-      let params = new URLSearchParams();
+      const params = new URLSearchParams();
       params.set("from", new URL(request.url).pathname);
       return redirect("/login?" + params.toString());
     }
