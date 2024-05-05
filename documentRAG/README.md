@@ -18,13 +18,35 @@ Fill in both keys
 Then run
 
 ```
-python documentRAG/__main__.py
+python -m documentRAG
 ```
 
 You should see
 
 ```
-Ask question: 
+Usage: python -m documentRAG [chat | index]
+```
+
+In order to index, pass a file in 
+
+```
+python -m documentRAG index ./some.pdf
+```
+
+or a directory
+```
+python -m documentRAG index ~/Documents/pdfs
+```
+
+to Chat with the index, try
+
+```
+python -m documentRAG chat
+``` 
+
+You should see
+```
+Ask question:
 ```
 
 Type something and after a second or two you should see an answer

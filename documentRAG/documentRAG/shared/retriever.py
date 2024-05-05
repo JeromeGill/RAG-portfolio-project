@@ -1,18 +1,9 @@
-from haystack_integrations.document_stores.pinecone import PineconeDocumentStore
 from haystack_integrations.components.retrievers.pinecone import PineconeEmbeddingRetriever
-
-def documentStore(
-    dimension:int
-):
-    return PineconeDocumentStore(
-		environment="gcp-starter",
-		index="default",
-		namespace="default",
-		dimension=dimension
-)
+from .documentStore import documentStore
 
 def retriever(
-    dimension: int
+    dimension: int,
+    namespace:str="default"
 ):
-    document_store = documentStore(dimension=dimension)
+    document_store = documentStore(dimension=dimension, namespace=namespace)
     return PineconeEmbeddingRetriever(document_store=document_store)

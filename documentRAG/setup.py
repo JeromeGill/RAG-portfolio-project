@@ -9,6 +9,7 @@ requires = [
     "pinecone-haystack",
     "sentence-transformers>=2.2.0",
     "python-dotenv",
+    "pypdf",
     "pytest"
 ]
 here = Path(__file__).parent

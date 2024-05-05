@@ -42,12 +42,13 @@ class Chatbot():
         return response["llm"]["replies"][0]
 
 
-def factory():
+def factory(document_namespace: str = "default"):
     return Chatbot(
         settings.PROMPT_TEMPLATE,
         settings.EMBEDDINNG_MODEL,
         settings.LLM_MODEL,
         retriever(
-            settings.EMBEDDING_DIMENSIONS
+            settings.EMBEDDING_DIMENSIONS,
+            namespace=document_namespace
         )
     )
