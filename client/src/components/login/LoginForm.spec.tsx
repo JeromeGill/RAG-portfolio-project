@@ -3,11 +3,20 @@ import { LoginForm } from './LoginForm';
 import { useLogin } from '@/hooks/useLogin';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-describe('LoginForm', () => {
+vi.mock('@/hooks/useLogin');
 
+describe('LoginForm', () => {
+  const mockHandleSubmit = vi.fn();
+  const mockSetUsername = vi.fn();
+  const mockSetPassword = vi.fn();
+  
   beforeEach(() => {
     (useLogin as vi.Mock).mockReturnValue({
-      handleSubmit: vi.fn().mockResolvedValue(null),
+      handleSubmit: mockHandleSubmit,
+      setUsername: mockSetUsername,
+      setPassword: mockSetPassword,
+    });
+    mockHandleSubmit.mockClear();
   });
 
 
@@ -19,10 +28,12 @@ describe('LoginForm', () => {
 
   it('calls handleSubmit when the form is submitted', async () => {
     render(<LoginForm/>);
-    fireEvent.update(screen.getByLabelText(/Username/i), 'Test username');
-    fireEvent.update(screen.getByLabelText(/Password/i), 'Test password');
+    fireEvent.change(screen.getByLabelText(/Username/i), { target: { value: 'Test username' } });
+    fireEvent.change(screen.getByLabelText(/Password/i), { target: { value: 'Test password' } });
     fireEvent.submit(screen.getByRole('form'));
-    expect(useLogin.handleSubmit).toHaveBeenCalledTimes(1);
+    expect(mockSetUsername).toHaveBeenCalledTimes(1);
+    expect(mockSetPassword).toHaveBeenCalledTimes(1);
+    expect(mockHandleSubmit).toHaveBeenCalledTimes(1);
   });
 })
-});
+

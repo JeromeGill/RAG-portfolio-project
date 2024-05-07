@@ -5,7 +5,7 @@ import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
 import { useChatbot } from '@/hooks/useChatbot';
 import { ScrollArea } from "@/components/ui/scroll-area"
-import LoadingSpinner from '../ui/loading-spinner';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export const ChatPanel: React.FC = () => {
     const [messages, setMessages] = useState<string[]>([]);
@@ -14,12 +14,9 @@ export const ChatPanel: React.FC = () => {
     if (messages.length === 0) {
         setMessages([
             'Chatbot: Hello! I\'ve been trained on Anastasia\'s Ecuador documents. Ask me anything about it. Spanish, english, whatever you like',
-        ],
-    );
-
+        ]);
     }
 
-    console.log(isLoading)
     const sendMessage = async (message: string) => {
         // @todo hook here to send the message to the backend
         console.log('Sending message:', message);

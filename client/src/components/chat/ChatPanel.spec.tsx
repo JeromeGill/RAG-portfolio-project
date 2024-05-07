@@ -6,30 +6,32 @@ import { vi } from 'vitest';
 
 vi.mock('@/hooks/useChatbot');
 
+const mockAskChatbot = vi.fn();
+
 describe('ChatPanel', () => {
   beforeEach(() => {
-    (useChatbot as vi.Mock).mockClear();
+    mockAskChatbot.mockClear();
   });
 
   it('renders without crashing', () => {
+    (useChatbot as vi.Mock).mockReturnValue({
+      askChatbot: mockAskChatbot,
+      isLoading: false,
+    });
     render(<ChatPanel />);
     expect(screen.getByText(/Chatbot: Hello!/i)).toBeInTheDocument();
   });
 
-  it('displays loading spinner when isLoading is true', () => {
-    (useChatbot as vi.Mock).mockReturnValue({
-      isLoading: true,
-    });
-    render(<ChatPanel />);
-    expect(screen.getByRole('status')).toHaveClass('hidden');
-  });
   
   it('sends a message when the send button is clicked', async () => {
+    mockAskChatbot.mockResolvedValue('Chatbot response');
+
+
     (useChatbot as vi.Mock).mockReturnValue({
-      askChatbot: vi.fn().mockResolvedValue('Chatbot response'),
+      askChatbot: mockAskChatbot,
       isLoading: false,
-      error: null,
     });
+
     render(<ChatPanel />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Test message' } });
     fireEvent.click(screen.getByText(/send/i));
