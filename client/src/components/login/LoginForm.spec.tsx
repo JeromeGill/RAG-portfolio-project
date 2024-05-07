@@ -1,34 +1,28 @@
 import { expect } from 'vitest';
 import { LoginForm } from './LoginForm';
-import * as useLoginModule from '@/hooks/useLogin';
+import { useLogin } from '@/hooks/useLogin';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('LoginForm', () => {
-  let originalUseLogin: useLogin;
-  let mockUseLogin: any;
 
   beforeEach(() => {
-    originalUseLogin = useLoginModule.useLogin;
-    mockUseLogin = {
-      handleSubmit: vi.fn().mockResolvedValue(),
-    };
-    useLoginModule.useLogin = () => mockUseLogin;
+    (useLogin as vi.Mock).mockReturnValue({
+      handleSubmit: vi.fn().mockResolvedValue(null),
   });
 
-  afterEach(() => {
-    useLoginModule.useLogin = originalUseLogin;
-  });
 
   it('renders without crashing', () => {
-    render(LoginForm);
+    render(<LoginForm/>);
     expect(screen.getByText(/Username/i)).toBeInTheDocument();
     expect(screen.getByText(/Password/i)).toBeInTheDocument();
   });
 
   it('calls handleSubmit when the form is submitted', async () => {
-    render(LoginForm);
+    render(<LoginForm/>);
     fireEvent.update(screen.getByLabelText(/Username/i), 'Test username');
     fireEvent.update(screen.getByLabelText(/Password/i), 'Test password');
     fireEvent.submit(screen.getByRole('form'));
-    expect(mockUseLogin.handleSubmit).toHaveBeenCalledTimes(1);
+    expect(useLogin.handleSubmit).toHaveBeenCalledTimes(1);
   });
+})
 });

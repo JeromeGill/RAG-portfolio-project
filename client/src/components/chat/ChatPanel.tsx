@@ -19,6 +19,7 @@ export const ChatPanel: React.FC = () => {
 
     }
 
+    console.log(isLoading)
     const sendMessage = async (message: string) => {
         // @todo hook here to send the message to the backend
         console.log('Sending message:', message);
@@ -33,16 +34,22 @@ export const ChatPanel: React.FC = () => {
   
     // @todo automatically scroll to bottom when new messages are added, or something
     return (
-    <> 
-        <ScrollArea style={{paddingBottom: 60}}>
+      <div className="bg-gray-200 p-4 h-full rounded-lg mb-4">
+        <ScrollArea
+            className="flex flex-col space-y-2"
+            style={{paddingBottom: 60}}
+            >
           {messages.map((message, index) => (
-            <ChatMessage key={index} message={message} />
+            <ChatMessage key={index} message={message} className={index % 2 == 0 ?  "justify-start" : "justify-end"} />
           ))}
-          <div className={isLoading ? "" : "hidden"}>
-            <LoadingSpinner/>
+          <div >
+            <LoadingSpinner hidden={!isLoading} />
           </div>
         </ScrollArea>
-        <ChatInput sendMessage={sendMessage} disabled={isLoading} />
-    </>
+        <ChatInput
+          sendMessage={sendMessage}
+          disabled={isLoading} 
+        />
+    </div>
     );
   };

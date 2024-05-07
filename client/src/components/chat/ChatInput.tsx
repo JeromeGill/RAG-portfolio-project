@@ -29,18 +29,33 @@ export const ChatInput: React.FC<{ sendMessage: SendMessageFunction, disabled: b
   };
 
   return (
-    <div className="fixed bottom-0 flex-auto flex items-center">
-      <Textarea
-        placeholder="Type your message..."
-        value={message}
-        disabled={disabled}
-        onChange={handleChange} // Add onChange event handler
-        onKeyPress={handleKeyPress}
-      />
-      <Button
-        onClick={handleMessageSend}>
-          Send
-        </Button>
+    
+    <div className="relative">
+      <div className="bottom-0 flex  items-center">
+        <Textarea
+          placeholder="Type your message..."
+          value={message}
+          disabled={disabled}
+          className='flex-1 border-gray-300 border p-2 rounded-lg focus:outline-none'
+          onChange={handleChange} // Add onChange event handler
+          onKeyPress={handleKeyPress}
+          style={
+            {
+              paddingRight: '80px'
+            }
+          }
+        >
+
+        </Textarea>
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pr-6">
+          <Button
+            onClick={handleMessageSend}
+            className='text-white px-3 py-2 rounded-lg'
+            >
+              Send
+            </Button>
+          </div>
+      </div>
     </div>
   );
 };
