@@ -18,11 +18,17 @@ from django.contrib import admin
 from django.urls import path
 from .views import is_authed_view
 from chatbot.views import ask_question_view
+from workspaces.views import workspace_view, workspace_list_view
+
 from rest_framework.authtoken import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/login', views.obtain_auth_token),
     path('api/token', is_authed_view, name='is_authed'),
-    path("api/question", ask_question_view, name="question")
+    path("api/question", ask_question_view, name="question"),
+    path('api/workspace/<int:workspace_id>/', workspace_view, name='workspace-detail'),
+    path('api/workspaces/', workspace_list_view, name='workspace-list'),
+    # other paths...
 ]
+

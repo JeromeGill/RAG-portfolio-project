@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'chatbot.apps.ChatbotConfig',
+    'workspaces.apps.WorkspacesConfig',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True # I'm sorry
