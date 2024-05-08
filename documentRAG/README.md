@@ -24,24 +24,25 @@ python -m documentRAG
 You should see
 
 ```
-Usage: python -m documentRAG [chat | index]
+Usage: python -m documentRAG [chat | index] [namespace]
 ```
 
-In order to index, pass a file in 
+In order to index, pass a file into a namespace.
+It works best with less files per namespace 
 
 ```
-python -m documentRAG index ./some.pdf
+python -m documentRAG index your-namespace ./some.pdf
 ```
 
 or a directory
 ```
-python -m documentRAG index ~/Documents/pdfs
+python -m documentRAG index your-namespace ~/Documents/pdfs
 ```
 
 to Chat with the index, try
 
 ```
-python -m documentRAG chat
+python -m documentRAG chat [namespace]
 ``` 
 
 You should see
