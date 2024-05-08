@@ -1,18 +1,33 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from 'react';
 import { Textarea, Button } from "@/components/ui"
+import { useChatbot } from '@/contexts/chatbot';
 
-// Define the type for the sendMessage function
-type SendMessageFunction = (message: string) => void;
 
 // Text input component
-export const ChatInput: React.FC<{ sendMessage: SendMessageFunction, disabled: boolean }> = ({ sendMessage, disabled }) => {
+// This renders as a text area with a send button
+export const ChatInput: React.FC = () => {
+  // The unsent message in the textbox
   const [message, setMessage] = useState<string>('');
 
+  // The chat history that has been sent and recived by the chatbot
+  const { setMessages, setIsLoading, askChatbot, isLoading } = useChatbot();
+  
+  // This is probably an anti-pattern, but it's a quick way to get the loading spinner to show
+  // @todo handle API calls with react-query or something
+  setIsLoading(isLoading);
+
   // Function to handle sending the message
-  const handleMessageSend = () => {
+  const handleMessageSend = async () => {
     if (message.trim() !== '') {
       setMessage(''); // Clear the input field after sending the message
-      sendMessage(message); // Call the sendMessage function
+      setMessages(prevMessages => [...prevMessages, 'User: ' + message]);
+      try {
+          console.log('message', message)
+          const response = await askChatbot(message)
+          setMessages(prevMessages => [...prevMessages,'Chatbot: ' + response]);
+      } catch (error: any) {
+          setMessages(prevMessages => [...prevMessages,'Error: ' + error.message]);
+      }
     }
   };
 
@@ -29,13 +44,12 @@ export const ChatInput: React.FC<{ sendMessage: SendMessageFunction, disabled: b
   };
 
   return (
-    
     <div className="relative">
-      <div className="bottom-0 flex  items-center">
         <Textarea
+          data-testid="ci-message-area"
           placeholder="Type your message..."
           value={message}
-          disabled={disabled}
+          disabled={isLoading}
           className='flex-1 border-gray-300 border p-2 rounded-lg focus:outline-none'
           onChange={handleChange} // Add onChange event handler
           onKeyPress={handleKeyPress}
@@ -45,17 +59,14 @@ export const ChatInput: React.FC<{ sendMessage: SendMessageFunction, disabled: b
             }
           }
         >
-
         </Textarea>
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pr-6">
           <Button
+            data-testid="ci-send-button"
             onClick={handleMessageSend}
             className='text-white px-3 py-2 rounded-lg'
-            >
-              Send
-            </Button>
-          </div>
-      </div>
+            >Send</Button>
+        </div>
     </div>
   );
 };

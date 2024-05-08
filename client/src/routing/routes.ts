@@ -1,8 +1,7 @@
 
 import { createBrowserRouter } from "react-router-dom";
 
-import { Login }  from '@/pages/Login.tsx';
-import { Chatbot } from '@/pages/Chatbot.tsx';
+import { LoginPage, ChatbotPage }  from '@/pages';
 import { loginLoader, protectedLoader } from './loaders.ts';
 
 export const router = createBrowserRouter([
@@ -11,12 +10,12 @@ export const router = createBrowserRouter([
       children: [
         {
           index: true,
-          Component: Chatbot,
+          Component: ChatbotPage,
           loader: protectedLoader,
         },
         {
           path: "login",
-          Component: Login,
+          Component: LoginPage,
           loader: loginLoader,
         },
       ],

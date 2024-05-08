@@ -1,21 +1,57 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+// ChatInput.test.tsx
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
 import { ChatInput } from './ChatInput';
+import { ChatbotProvider } from '@/contexts/chatbot';
+
+const askChatbot = vi.fn();
+
+vi.mock('@/contexts/chatbot/useChatbot', () => ({
+  useChatbot: () => ({
+    setMessages: vi.fn(),
+    setIsLoading: vi.fn(),
+    askChatbot:askChatbot,
+    isLoading: false,
+  }),
+}));
 
 describe('ChatInput', () => {
-  const sendMessageMock = vi.fn();
+  it('renders correctly', () => {
+    const { getByPlaceholderText } = render(
+      <ChatbotProvider>
+        <ChatInput />
+      </ChatbotProvider>
+    );
 
-  beforeEach(() => {
-    render(<ChatInput sendMessage={sendMessageMock} disabled={false} />);
+    expect(getByPlaceholderText('Type your message...')).toBeInTheDocument();
   });
 
-  it('renders the input and send button', () => {
-    expect(screen.getByPlaceholderText('Type your message...')).toBeInTheDocument();
-    expect(screen.getByText('Send')).toBeInTheDocument();
-  });
+  it('Doesn\' call askChatbot when send button is clicked with no message', () => {
+    const { getByTestId } = render(
+      <ChatbotProvider>
+        <ChatInput />
+      </ChatbotProvider>
+    );
 
-  it('calls sendMessage when the send button is clicked', () => {
-    fireEvent.change(screen.getByPlaceholderText('Type your message...'), { target: { value: 'Test message' } });
-    fireEvent.click(screen.getByText('Send'));
-    expect(sendMessageMock).toHaveBeenCalledWith('Test message');
+    fireEvent.click(getByTestId('ci-send-button'));
+    expect(askChatbot).not.toBeCalled();
+  });
+  
+  it('calls askChatbot when send button is clicked', () => {
+    const { getByTestId } = render(
+      <ChatbotProvider>
+        <ChatInput />
+      </ChatbotProvider>
+    );
+
+    const textarea = getByTestId('ci-message-area') as HTMLTextAreaElement;
+    fireEvent.change(textarea, { target: { value: 'Test message' } });
+
+    expect(textarea.value).toBe('Test message');
+
+    console.log('firing')
+    fireEvent.click(getByTestId('ci-send-button'));
+
+    expect(askChatbot).toHaveBeenCalled();
   });
 });

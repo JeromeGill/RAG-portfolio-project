@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 
 export const ChatMessage: React.FC<{ 
-  className: string,  
+  className?: string,  
   message: string 
 }> = ({ 
   message,

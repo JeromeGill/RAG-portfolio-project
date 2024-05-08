@@ -6,4 +6,6 @@ node_modules
 .eggs
 *.egg-info
 
+## Things I use
 notes
+test.html

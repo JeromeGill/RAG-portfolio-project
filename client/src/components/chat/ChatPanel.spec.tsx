@@ -1,41 +1,26 @@
-import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+// ChatPanel.test.tsx
+import React from 'react';
+import { render } from '@testing-library/react';
 import { ChatPanel } from './ChatPanel';
-import { useChatbot } from '@/hooks/useChatbot';
-import { vi } from 'vitest';
+import { ChatbotProvider } from '@/contexts/chatbot/ChatbotProvider';
 
-vi.mock('@/hooks/useChatbot');
+vi.mock("@/contexts/chatbot", () => ({
+    useChatbot: () => ({
+        messages: ['Test message 1', 'Test message 2'],
+    }),
+}));
 
-const mockAskChatbot = vi.fn();
 
 describe('ChatPanel', () => {
-  beforeEach(() => {
-    mockAskChatbot.mockClear();
-  });
-
-  it('renders without crashing', () => {
-    (useChatbot as vi.Mock).mockReturnValue({
-      askChatbot: mockAskChatbot,
-      isLoading: false,
-    });
-    render(<ChatPanel />);
-    expect(screen.getByText(/Chatbot: Hello!/i)).toBeInTheDocument();
-  });
-
-  
-  it('sends a message when the send button is clicked', async () => {
-    mockAskChatbot.mockResolvedValue('Chatbot response');
+  it('renders correctly', () => {
+    const { getByText } = render(
+      <ChatbotProvider>
+        <ChatPanel />
+      </ChatbotProvider>
+    );
 
 
-    (useChatbot as vi.Mock).mockReturnValue({
-      askChatbot: mockAskChatbot,
-      isLoading: false,
-    });
-
-    render(<ChatPanel />);
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Test message' } });
-    fireEvent.click(screen.getByText(/send/i));
-    await waitFor(() => expect(screen.getByText(/Chatbot: Chatbot response/i)).toBeInTheDocument());
+    expect(getByText('Test message 1')).toBeInTheDocument();
+    expect(getByText('Test message 2')).toBeInTheDocument();
   });
 });
-

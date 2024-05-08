@@ -1,2 +1,2 @@
-export * from "./Chatbot";
-export * from "./Login";
+export * from "./ChatbotPage";
+export * from "./LoginPage";
