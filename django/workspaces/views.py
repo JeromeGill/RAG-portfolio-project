@@ -21,6 +21,7 @@ def workspace_view(request, workspace_id):
     serializer = WorkspaceSerializer(workspace)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])

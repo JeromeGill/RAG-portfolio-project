@@ -27,8 +27,8 @@ urlpatterns = [
     path('api/login', views.obtain_auth_token),
     path('api/token', is_authed_view, name='is_authed'),
     path("api/question", ask_question_view, name="question"),
-    path('api/workspace/<int:workspace_id>/', workspace_view, name='workspace-detail'),
     path('api/workspaces/', workspace_list_view, name='workspace-list'),
+    path('api/workspace/<int:workspace_id>/', workspace_view, name='workspace-detail'),
     # other paths...
 ]
 

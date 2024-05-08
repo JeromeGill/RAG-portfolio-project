@@ -51,7 +51,18 @@ INSTALLED_APPS = [
     'workspaces.apps.WorkspacesConfig',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True # I'm sorry
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
