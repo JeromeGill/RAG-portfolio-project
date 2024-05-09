@@ -41,10 +41,7 @@ export const WorkspaceList: React.FC = () => {
     }
 
     return (
-        <Select
-            onValueChange={handleWorkspaceChange}
-            data-testid={`workspace-select`}
-        >
+        <Select onValueChange={handleWorkspaceChange}>
         <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Workspace" />
         </SelectTrigger>
@@ -53,7 +50,6 @@ export const WorkspaceList: React.FC = () => {
                     <SelectItem
                         value={String(workspace.id)}
                         key={workspace.id}
-                        data-testid={`workspace-${workspace.id}`}
                     >{workspace.name}
                     </SelectItem>
                 ))}
