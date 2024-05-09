@@ -12,8 +12,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Header */}
             <Header />
             {/* Main content */}
-            <main className="container flex-1 mx-auto p-4">
-                 <div className='max-w-screen-lg'>
+            <main className="container flex-1 p-4">
+                 <div className='max-w-screen-lg mx-auto'>
                 {children}
                 </div>
             </main>
