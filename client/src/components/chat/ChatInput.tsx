@@ -22,8 +22,8 @@ export const ChatInput: React.FC = () => {
       setMessage(''); // Clear the input field after sending the message
       setMessages(prevMessages => [...prevMessages, 'User: ' + message]);
       try {
-          console.log('message', message)
-          const response = await askChatbot(message)
+          // @todo load the index name from the workspace
+          const response = await askChatbot(message, 'default')
           setMessages(prevMessages => [...prevMessages,'Chatbot: ' + response]);
       } catch (error: any) {
           setMessages(prevMessages => [...prevMessages,'Error: ' + error.message]);

@@ -48,10 +48,7 @@ describe('ChatInput', () => {
     fireEvent.change(textarea, { target: { value: 'Test message' } });
 
     expect(textarea.value).toBe('Test message');
-
-    console.log('firing')
     fireEvent.click(getByTestId('ci-send-button'));
-
     expect(askChatbot).toHaveBeenCalled();
   });
 });

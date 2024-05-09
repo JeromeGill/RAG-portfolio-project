@@ -17,7 +17,7 @@ export const ChatbotProvider: React.FC<{ children: React.ReactNode }> = ({ child
         'Chatbot: Hello! I\'ve been trained on Anastasia\'s Ecuador documents. Ask me anything about it. Spanish, english, whatever you like',
       ]);
     
-    const askChatbot = async (question: string) => {
+    const askChatbot = async (question: string, indexName: string) => {
         setIsLoading(true);
         setError(null);
         try {
@@ -25,7 +25,7 @@ export const ChatbotProvider: React.FC<{ children: React.ReactNode }> = ({ child
                 throw new Error('No token found');
             }
             
-            const response = await askChatbotAction(question, token);
+            const response = await askChatbotAction({question, indexName}, token);
             if (!response.ok) {
                 throw new Error('Failed to post data');
             }

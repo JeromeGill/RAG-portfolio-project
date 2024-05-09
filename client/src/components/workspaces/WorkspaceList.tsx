@@ -2,8 +2,9 @@ import React from 'react';
 import { getWorkspacesAction } from '@/actions/workspaceActions';
 import { useQuery } from '@tanstack/react-query';
 import { useToken } from '@/hooks/useToken';
-import { LoadingSpinner } from '../ui/loading-spinner';
 import { useWorkspace } from '@/contexts/workspace/useWorkspace';
+
+
 import {
     Select,
     SelectContent,
@@ -15,34 +16,44 @@ import {
 
 export const WorkspaceList: React.FC = () => {
     const { token } = useToken()
-    const { activeWorkspace, setActiveWorkspace } = useWorkspace()
+    const { setActiveWorkspace } = useWorkspace()
 
+    
     if (!token) {
         return <></>
     }
 
-    const { error, data } = useQuery(
-        { 
+    // @todo error handling
+    const { data } = useQuery({ 
             queryKey: ['workspaces'],
             queryFn: () => getWorkspacesAction(token)
-        }
-    )
+        })
     
-    if (error) {
-        return <div>Error: {error.message}</div>
+    
+    const handleWorkspaceChange = (workspaceId: string) => {
+        if (data) {
+            // @todo string ids please!
+            const workspace = data.find((workspace: Workspace) => workspace.id === Number(workspaceId))
+            if (workspace) {
+                setActiveWorkspace(workspace)
+            }
+        }
     }
 
     return (
-        <Select>
+        <Select
+            onValueChange={handleWorkspaceChange}
+            data-testid={`workspace-select`}
+        >
         <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Workspace" />
         </SelectTrigger>
             <SelectContent>
                 {data && data.map((workspace: Workspace) => (
                     <SelectItem
-                        value={workspace.name}
+                        value={String(workspace.id)}
                         key={workspace.id}
-                        onClick={() => setActiveWorkspace(workspace)}
+                        data-testid={`workspace-${workspace.id}`}
                     >{workspace.name}
                     </SelectItem>
                 ))}
