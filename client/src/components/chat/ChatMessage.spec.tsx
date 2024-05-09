@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import { ChatMessage } from './ChatMessage';
+import { render, screen } from "@testing-library/react";
+import { ChatMessage } from "./ChatMessage";
 
-describe('ChatMessage', () => {
-  it('renders the correct message', () => {
+describe("ChatMessage", () => {
+  it("renders the correct message", () => {
     render(<ChatMessage message="Test message" />);
-    expect(screen.getByText('Test message')).toBeInTheDocument();
+    expect(screen.getByText("Test message")).toBeInTheDocument();
   });
 });

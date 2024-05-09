@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext } from "react";
 
 interface ChatbotContextProps {
   messages: string[];
@@ -10,4 +10,6 @@ interface ChatbotContextProps {
   askChatbot(question: string, indexName: string): Promise<any>; // @todo type the response
 }
 
-export const ChatbotContext = createContext<ChatbotContextProps | undefined>(undefined);
+export const ChatbotContext = createContext<ChatbotContextProps | undefined>(
+  undefined,
+);

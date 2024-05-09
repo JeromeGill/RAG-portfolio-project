@@ -1,27 +1,24 @@
-
-import React, { ReactNode } from 'react';
-import { Header } from './Header';
+import React, { ReactNode } from "react";
+import { Header } from "./Header";
 
 interface LayoutProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-    return (
-        <div className="h-screen flex flex-col">
-            {/* Header */}
-            <Header />
-            {/* Main content */}
-            <main className="container flex-1 p-4">
-                 <div className='max-w-screen-lg mx-auto'>
-                {children}
-                </div>
-            </main>
-            
-            {/* Footer */}
-            <footer className="bg-gray-800 text-white p-4 mt-4">
-                <p>&copy; 2024 Jerome Gill</p>
-            </footer>
-        </div>
-    );
+  return (
+    <div className="h-screen flex flex-col">
+      {/* Header */}
+      <Header />
+      {/* Main content */}
+      <main className="container flex-1 p-4">
+        <div className="max-w-screen-lg mx-auto">{children}</div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white p-4 mt-4">
+        <p>&copy; 2024 Jerome Gill</p>
+      </footer>
+    </div>
+  );
 };
